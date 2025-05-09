@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Model Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+    <h1>ML Model Dashboard</h1>
+
+    <h3>Dataset Info</h3>
+    <p><strong>Number of Records:</strong> {{ num_records }}</p>
+    <h4>Feature Summary</h4>
+    {{ summary_html|safe }}
+
+    <h3>Model Performance</h3>
+    <p><strong>Accuracy:</strong> {{ accuracy }}</p>
+
+    <h3>Target Distribution</h3>
+    <img src="data:image/png;base64,{{ bar_chart }}" class="img-fluid"/>
+
+    <h3>Confusion Matrix</h3>
+    <img src="data:image/png;base64,{{ confusion_plot }}" class="img-fluid"/>
+</body>
+</html>

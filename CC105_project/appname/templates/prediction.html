@@ -6,52 +6,54 @@
     <title>Document</title>
 </head>
 <body>
-    {% block content %}
-  <div class="container mt-5">
-    <h2 class="mb-4">Wine Quality Prediction</h2>
+    <div class="container mt-5">
+        <h2 class="mb-4">Wine Quality Prediction</h2>
     {% if user.is_authenticated %}
-    <form method="post" action="{% url 'save_input' %}">
-        {% csrf_token %}
-        <label for="Volatile Acidity">Volatile Acidity:</label>
-        <input type="number" name="volatile_acidity" id="volatile_acidity" step="any"> <br><br>
-        <label for="Citric Acid">Citric Acid:</label>
-        <input type="number" name="citric_acid" id="citric_acid" step="any"> <br><br>
-        <label for="Density">Density:</label>
-        <input type="number" name="density" id="density" step="any"> <br><br>
-        <label for="pH">pH:</label>
-        <input type="number" name="pH" id="pH" step="any"> <br><br>
-        <label for="Alcohol">Alcohol:</label>
-        <input type="number" name="alcohol" id="alcohol" step="any"> <br><br>
-        <label for="Residual Sugar">Residual Sugar:</label>
-        <input type="number" name="residual_sugar" id="residual_sugar" step="any"> <br><br>
-        <label for="Chloride">Chloride:</label>
-        <input type="number" name="chloride" id="chloride" step="any"> <br><br>
-        <label for="Sulphates">Sulphates:</label>
-        <input type="number" name="sulphates" id="sulphates" step="any"> <br><br>
-        <label for="Fixed Acidity">Fixed Acidity:</label>
-        <input type="number" name="fixed_acidity" id="fixed_acidity" step="any"> <br><br>
-        <label for="Free Sulfur Dioxide">Free Sulfur Dioxide:</label>
-        <input type="number" name="free_sulfur_dioxide" id="free_sulfur_dioxide" step="any"> <br><br>
-        <label for="Total Sulfur Dioxide">Total Sulfur Dioxide:</label>
-        <input type="number" name="total_sulfur_dioxide" id="total_sulfur_dioxide" step="any"> <br><br>
-        <input type="submit" value="Submit">
-    </form>
-    {% if form.errors %}
-    <ul style="color: red;">
-        {% for field, errors in form.errors.items %}
+        <form method="post" action="{% url 'save_input' %}">
+            {% csrf_token %}
+            <label for="Volatile Acidity">Volatile Acidity:</label>
+            <input type="number" name="volatile_acidity" id="volatile_acidity" step="any"> <br><br>
+            <label for="Citric Acid">Citric Acid:</label>
+            <input type="number" name="citric_acid" id="citric_acid" step="any"> <br><br>
+            <label for="Density">Density:</label>
+            <input type="number" name="density" id="density" step="any"> <br><br>
+            <label for="pH">pH:</label>
+            <input type="number" name="pH" id="pH" step="any"> <br><br>
+            <label for="Alcohol">Alcohol:</label>
+            <input type="number" name="alcohol" id="alcohol" step="any"> <br><br>
+            <label for="Residual Sugar">Residual Sugar:</label>
+            <input type="number" name="residual_sugar" id="residual_sugar" step="any"> <br><br>
+            <label for="Chloride">Chloride:</label>
+            <input type="number" name="chloride" id="chloride" step="any"> <br><br>
+            <label for="Sulphates">Sulphates:</label>
+            <input type="number" name="sulphates" id="sulphates" step="any"> <br><br>
+            <label for="Fixed Acidity">Fixed Acidity:</label>
+            <input type="number" name="fixed_acidity" id="fixed_acidity" step="any"> <br><br>
+            <label for="Free Sulfur Dioxide">Free Sulfur Dioxide:</label>
+            <input type="number" name="free_sulfur_dioxide" id="free_sulfur_dioxide" step="any"> <br><br>
+            <label for="Total Sulfur Dioxide">Total Sulfur Dioxide:</label>
+            <input type="number" name="total_sulfur_dioxide" id="total_sulfur_dioxide" step="any"> <br><br>
+            <input type="submit" value="Submit">
+        </form>
+        {% if form.errors %}
+        <ul style="color: red;">
+            {% for field, errors in form.errors.items %}
             <li>{{ field }}: {{ errors|striptags }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-    {% if prediction %}
-        <div class="alert alert-info mt-4">
-            <strong>Prediction Result:</strong> {{ prediction }}
-        </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% if prediction is not None %}
+            {% if prediction == 0 %}
+                <h2>Prediction: 0 - This means your wine quality is on the lower side</h2>
+            {% elif prediction == 1 %}
+                <h2>Prediction: 1 - This means your wine quality is on the medium side</h2>
+            {% else %}
+                <h2>Prediction: 2 - This means your wine quality is on the higher side</h2>
+            {% endif %}
+        {% endif %}
+        {% else %}
+            <p>Please <a href="{% url 'login' %}">Log In</a> To use the prediction tool.</p>
     {% endif %}
-    {% else %}
-        <p>Please <a href="{% url 'login' %}">Log In</a> To use the prediction tool.</p>
-    {% endif %}
-{% endblock %}
+    </div>
 </body>
 </html>
-
