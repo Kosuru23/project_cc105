@@ -1,24 +1,50 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Model Dashboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <title>Wine Dashboard</title>
+    <link rel="stylesheet" href="{% static 'appname/css/dashboard.css' %}">
 </head>
-<body class="p-4">
-    <h1>ML Model Dashboard</h1>
+<body>
+    <div class="header">
+        <h1>Wine Quality Dashboard</h1>
+        <div class="nav-buttons">
+            {% if user.is_authenticated %}
+                <form method="POST" action="{% url 'logout' %}" class="logout-form">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+                <a href="{% url 'home' %}" class="btn home">Home</a>
+                <a href="{% url 'start_prediction' %}" class="btn dashboard">Prediction</a>
+            {% endif %}
+        </div>
+    </div>
 
-    <h3>Dataset Info</h3>
-    <p><strong>Number of Records:</strong> {{ num_records }}</p>
-    <h4>Feature Summary</h4>
-    {{ summary_html|safe }}
+    <div class="container">
+        <div class="section centered-section">
+            <div>
+                <h3>Dataset Info</h3>
+                <p><strong>Number of Records:</strong> {{ num_records }}</p>
+                <div>{{ summary_html|safe }}</div>
+            </div>
+        </div>
 
-    <h3>Model Performance</h3>
-    <p><strong>Accuracy:</strong> {{ accuracy }}</p>
+        <div class="section">
+            <h3>Model Performance</h3>
+            <p><strong>Accuracy:</strong> {{ accuracy }}</p>
+        </div>
 
-    <h3>Target Distribution</h3>
-    <img src="data:image/png;base64,{{ bar_chart }}" class="img-fluid"/>
+        <div class="section side-by-side">
+            <div class="chart">
+                <h3>Target Distribution</h3>
+                <img src="data:image/png;base64,{{ bar_chart }}" class="img-fluid" />
+            </div>
 
-    <h3>Confusion Matrix</h3>
-    <img src="data:image/png;base64,{{ confusion_plot }}" class="img-fluid"/>
+            <div class="chart">
+                <h3>Confusion Matrix</h3>
+                <img src="data:image/png;base64,{{ confusion_plot }}" class="img-fluid" />
+            </div>
+        </div>
+    </div>
 </body>
 </html>

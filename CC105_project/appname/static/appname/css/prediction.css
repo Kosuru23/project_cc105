@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    color: rgb(235, 232, 232);
+    min-height: 100vh;
+    background-color: #1b0e10;
+    overflow-x: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0 20px;
+    background-color: #1b0e10;
+    flex-wrap: wrap;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 32px;
+    color: #fff;
+}
+
+.nav-buttons {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-buttons .btn {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-buttons .btn.home {
+    background-color: #2196F3;
+}
+
+.nav-buttons .btn.prediction:hover {
+    background-color: #1976D2;
+}
+
+.nav-buttons .btn.dashboard {
+    background-color: #4CAF50;
+}
+
+.nav-buttons .btn.dashboard:hover {
+    background-color: #45a049;
+}
+
+.logout-form button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.logout-form button:hover {
+    background-color: #d32f2f;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: calc(100vh - 70px);
+    background: linear-gradient(to right, #2c3e50, #4ca1af);
+}
+
+.form-container {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin: 4px 0 12px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+input[type="submit"] {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}

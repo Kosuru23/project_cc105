@@ -3,30 +3,31 @@
 <html>
 <head>
     <title>Wine App</title>
+    <link rel="stylesheet" href="{% static 'appname/css/home.css' %}">
 </head>
-<link rel="stylesheet" href="{% static 'appname/css/home.css' %}">
 <body>
     <div class="header">
-        <div class="title">
-            <h1>Quality Wine Website Checker!</h1>
-        </div>
-        <div>
-            {% if user.is_authenticated %}
-            <form method="POST" action="{% url 'logout' %}">
+    <div class="title">
+        <h1>Quality Wine Website Checker!</h1>
+    </div>
+    <div class="nav-buttons">
+        {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'logout' %}" class="logout-form">
                 {% csrf_token %}
                 <button type="submit">Logout</button>
             </form>
-            <a href="{% url 'dashboard' %}">Dashboard</a>
-            {% else %}
-                <a href="{% url 'login' %}">Log In</a>
-            {% endif %}
-        </div>        
-    </div>  
+            <a href="{% url 'dashboard' %}" class="btn dashboard">Dashboard</a>
+            <a href="{% url 'start_prediction' %}" class="btn prediction">Prediction</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn">Log In</a>
+        {% endif %}
+    </div>
+</div>
     <div class="container">
         <div class="contain">
             <div class="description">
                 <div>
-                    <h2>Description</h2>
+                    <h2>Description:</h2>
                 </div>
                 <div>
                     <p>It is a Categorical Model where it predicts the quality of your alcohol based on:</p>
@@ -46,13 +47,19 @@
                         <li>Alcohol</li>
                     </ul>
                 </div>
+                <div>
+                    <p>It predicts if Quality-Low or Quality-Mid or Quality-High</p>
+                </div>
+                <div class="action">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'start_prediction' %}">Start Prediction</a>
+                    {% else %}
+                        <a href="{% url 'login' %}">Log In To Get Started</a>
+                    {% endif %}
+                </div>
             </div>
-            <div class="action">
-                {% if user.is_authenticated %}
-                    <a href="{% url 'start_prediction' %}">Start Prediction</a>
-                {% else %}
-                    <a href="{% url 'login' %}">Log In To Get Started</a>
-                {% endif %}
+            <div class="photo">
+                <img src="{% static 'appname/images/wine.webp' %}" alt="Wine Image">
             </div>
         </div>
     </div>    
