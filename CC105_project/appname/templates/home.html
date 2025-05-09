@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wine App</title>
+</head>
+<link rel="stylesheet" href="{% static 'appname/css/home.css' %}">
+<body>
+    <div class="header">
+        <div class="title">
+            <h1>Quality Wine Website Checker!</h1>
+        </div>
+        <div>
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+            {% else %}
+                <a href="{% url 'login' %}">Log In</a>
+            {% endif %}
+        </div>        
+    </div>  
+    <div class="container">
+        <div class="contain">
+            <div class="description">
+                <div>
+                    <h2>Description</h2>
+                </div>
+                <div>
+                    <p>It is a Categorical Model where it predicts the quality of your alcohol based on:</p>
+                </div>
+                <div>
+                    <ul>
+                        <li>Fixed Acidity</li>
+                        <li>Volatile Acidity</li>
+                        <li>Citric Acid</li>
+                        <li>Residual Sugar</li>
+                        <li>Chlorides</li>
+                        <li>Free Sulfur Dioxide</li>
+                        <li>Total Sulfur Dioxide</li>
+                        <li>Density</li>
+                        <li>pH</li>
+                        <li>Sulphates</li>
+                        <li>Alcohol</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="action">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'start_prediction' %}">Start Prediction</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Log In To Get Started</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>    
+</body>
+</html>
